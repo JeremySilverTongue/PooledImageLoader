@@ -9,14 +9,12 @@ import random
 from glob import glob
 
 def worker_main(image_paths, output_queue, image_output_size):
-    print os.getpid(),"working"
     while True:
         path = random.choice(image_paths)
         image = Image.open(path)
         image.thumbnail(image_output_size, Image.ANTIALIAS);
         output_queue.put(image)
 
-        print os.getpid(),"processed", path
 
 class ImageLoader:
 
@@ -59,7 +57,6 @@ def main():
         time.sleep(1);
         thing = loader.get(False);
         print "got a thing", thing
-
 
 if __name__ == '__main__':
     main()
